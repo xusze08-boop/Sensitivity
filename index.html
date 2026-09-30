@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#020a14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>KAITOKID SENSITIVITY VIP</title>
+
+<link rel="icon" type="image/jpeg" href="https://i.imgur.com/s5j7Orr.jpeg">
+<link rel="apple-touch-icon" href="https://i.imgur.com/s5j7Orr.jpeg">
+<link rel="shortcut icon" href="https://i.imgur.com/s5j7Orr.jpeg">
+
+<style>
+:root{
+  --primary:#00d4ff;
+  --primary-glow:#00d4ffaa;
+  --cyan:#00ffe0;
+  --electric:#4a7fff;
+  --violet:#8b5dff;
+  --magenta:#ff3d9a;
+  --pink:#ff5eb8;
+  --lime:#00ffaa;
+  --amber:#ffb547;
+  --bg:#020a14;
+  --bg-2:#03101f;
+  --card:#071b33;
+  --card-2:#0b2447;
+  --card-3:#0f2f5c;
+  --text:#ffffff;
+  --text-soft:#c8d8f0;
+  --muted:#7a9bc8;
+  --line:#1d3a63;
+  --line-2:#2a4d80;
+  --danger:#ff3b6b;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  user-select:none;position:fixed;
+}
+
+/* ===== SCROLLER ===== */
+#scroller{
+  position:absolute;inset:0;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  scroll-behavior:smooth;
+  touch-action:pan-y;
+  padding-bottom:80px;
+}
+#scroller::-webkit-scrollbar{display:none;}
+#scroller{scrollbar-width:none;}
+
+.ic{
+  display:inline-block;width:18px;height:18px;
+  vertical-align:middle;flex-shrink:0;
+  stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.ic-sm{width:14px;height:14px;}
+.ic-md{width:20px;height:20px;}
+.ic-lg{width:24px;height:24px;}
+
+/* ===== BG ===== */
+#bgGrid{
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,.08) 1px,transparent 1px);
+  background-size:36px 36px;z-index:0;
+  animation:gridMove 22s linear infinite;pointer-events:none;
+}
+@keyframes gridMove{0%{background-position:0 0;}100%{background-position:36px 36px;}}
+#bgGlow{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 15% 8%,rgba(0,212,255,.25),transparent 40%),
+    radial-gradient(circle at 90% 25%,rgba(139,93,255,.22),transparent 45%),
+    radial-gradient(circle at 25% 60%,rgba(0,255,224,.12),transparent 45%),
+    radial-gradient(circle at 70% 95%,rgba(255,61,154,.14),transparent 50%),
+    radial-gradient(circle at 50% 40%,rgba(74,127,255,.18),transparent 55%);
+  pointer-events:none;
+}
+#bgVignette{
+  position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(0,0,0,.6) 100%);
+  pointer-events:none;
+}
+.particle{
+  position:fixed;width:3px;height:3px;border-radius:50%;
+  pointer-events:none;z-index:1;opacity:.65;
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0) translateX(0);opacity:0;}
+  10%{opacity:.8;}
+  90%{opacity:.8;}
+  100%{transform:translateY(-110vh) translateX(40px);opacity:0;}
+}
+
+#app{
+  position:relative;z-index:2;
+  width:100%;max-width:520px;margin:0 auto;
+  padding:0 16px;
+}
+.screen{display:none;animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.screen-inner{padding:0 0 40px;}
+
+/* ===== HEADER ===== */
+.header{
+  position:sticky;top:0;z-index:30;
+  display:flex;align-items:center;gap:12px;
+  padding:14px 0;
+  margin:0 -16px 0 -16px;
+  padding-left:16px;padding-right:16px;
+  background:linear-gradient(180deg,
+    rgba(2,10,20,.98) 0%,
+    rgba(2,10,20,.94) 55%,
+    rgba(2,10,20,.7) 85%,
+    rgba(2,10,20,0) 100%);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,212,255,.1);
+}
+.menu-btn{
+  width:44px;height:44px;border-radius:13px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+  cursor:pointer;flex-shrink:0;
+  transition:border-color .2s,box-shadow .2s;
+  box-shadow:0 0 12px rgba(0,212,255,.18),inset 0 0 12px rgba(0,212,255,.06);
+}
+.menu-btn:active{border-color:var(--primary);box-shadow:0 0 20px var(--primary-glow);}
+.menu-btn span{
+  width:18px;height:2px;background:var(--primary);
+  border-radius:2px;box-shadow:0 0 8px var(--primary-glow);
+}
+.title{
+  font-size:22px;font-weight:900;letter-spacing:1.8px;
+  background:linear-gradient(135deg,#ffffff,#5fa8ff 40%,#00d4ff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 14px rgba(0,212,255,.5));
+}
+.subtitle{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.5px;}
+
+/* ===== CARD ===== */
+.card{
+  background:linear-gradient(145deg,var(--card-2) 0%,var(--card) 100%);
+  border:1px solid var(--line-2);
+  border-radius:18px;padding:16px;margin-bottom:14px;
+  position:relative;overflow:hidden;
+  transition:transform .18s,border-color .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,.4),inset 0 1px 0 rgba(0,212,255,.1);
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--primary),var(--violet),transparent);
+  opacity:.9;
+}
+.card::after{
+  content:"";position:absolute;bottom:-40%;right:-20%;
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.18),transparent 70%);
+  pointer-events:none;opacity:.7;
+}
+.card.press:active{transform:scale(.98);}
+.card.neon{
+  border-color:var(--primary);
+  box-shadow:0 0 26px rgba(0,212,255,.4),0 4px 20px rgba(0,0,0,.5),inset 0 0 22px rgba(0,212,255,.08);
+}
+.card-title{
+  font-size:13px;font-weight:800;letter-spacing:1.2px;
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--text);
+}
+.card-title .ic{color:var(--primary);filter:drop-shadow(0 0 6px var(--primary-glow));}
+.card-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+
+/* ===== BUTTON ===== */
+.btn{
+  width:100%;padding:15px;border:none;border-radius:14px;
+  font-size:14px;font-weight:800;letter-spacing:1.8px;
+  color:#fff;cursor:pointer;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#00d4ff 0%,#4a7fff 50%,#8b5dff 100%);
+  box-shadow:0 0 24px rgba(0,212,255,.5),0 4px 16px rgba(74,127,255,.35),inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .15s,box-shadow .2s;
+  text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{
+  background:rgba(0,212,255,.06);
+  border:1.5px solid var(--primary);
+  color:var(--primary);
+  box-shadow:0 0 14px rgba(0,212,255,.25),inset 0 0 12px rgba(0,212,255,.05);
+}
+.btn.danger{
+  background:linear-gradient(135deg,#ff3b6b,#ff3d9a,#8b5dff);
+  box-shadow:0 0 24px rgba(255,59,107,.5),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.btn.small{padding:10px 14px;font-size:11px;width:auto;letter-spacing:1px;}
+.ripple{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.45);
+  transform:scale(0);animation:rip .6s ease-out;pointer-events:none;
+}
+@keyframes rip{to{transform:scale(4);opacity:0;}}
+.row{display:flex;gap:10px;align-items:center;}
+.between{display:flex;justify-content:space-between;align-items:center;}
+.badge{
+  font-size:9px;font-weight:800;letter-spacing:1px;
+  padding:4px 10px;border-radius:20px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.badge.green{background:rgba(0,255,200,.14);color:#00ffc8;border:1px solid #00ffc866;box-shadow:0 0 8px rgba(0,255,200,.3);}
+.badge.blue{background:rgba(0,212,255,.18);color:#00d4ff;border:1px solid #00d4ff88;box-shadow:0 0 8px rgba(0,212,255,.35);}
+.badge.purple{background:rgba(139,93,255,.2);color:#b28fff;border:1px solid #8b5dff77;}
+.badge.amber{background:rgba(255,181,71,.18);color:#ffb547;border:1px solid #ffb54788;box-shadow:0 0 8px rgba(255,181,71,.3);}
+.badge.magenta{background:rgba(255,61,154,.18);color:#ff5eb8;border:1px solid #ff3d9a88;box-shadow:0 0 8px rgba(255,61,154,.3);}
+.badge .ic{width:10px;height:10px;}
+
+/* ===== LOGIN ===== */
+#loginScreen .screen-inner{
+  padding-top:40px;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:calc(100vh - 80px);
+}
+.login-logo{text-align:center;margin-bottom:24px;}
+.login-logo .logo-img{
+  width:120px;height:120px;border-radius:24px;
+  object-fit:cover;border:2px solid var(--primary);
+  box-shadow:0 0 30px var(--primary-glow),0 0 70px rgba(139,93,255,.5),0 0 100px rgba(0,212,255,.25);
+  margin-bottom:14px;
+  animation:pulseLogo 2.5s ease-in-out infinite;
+}
+@keyframes pulseLogo{
+  0%,100%{filter:brightness(1) saturate(1);transform:scale(1);}
+  50%{filter:brightness(1.2) saturate(1.2);transform:scale(1.03);}
+}
+.login-logo h1{
+  font-size:26px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,#fff,#5fa8ff,#00d4ff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(0,212,255,.6));
+}
+.login-logo p{font-size:11px;letter-spacing:5px;color:#6bb6ff;margin-top:4px;font-weight:700;}
+.key-wrap{position:relative;margin:14px 0;}
+.key-wrap input{
+  width:100%;padding:16px 50px 16px 46px;
+  background:rgba(0,0,0,.55);
+  border:1.5px solid var(--line-2);
+  border-radius:14px;color:#fff;font-size:13px;
+  letter-spacing:1.5px;outline:none;
+  transition:border-color .2s,box-shadow .2s;font-weight:600;
+}
+.key-wrap input:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 20px rgba(0,212,255,.5),inset 0 0 12px rgba(0,212,255,.08);
+}
+.key-wrap input::placeholder{color:#456;letter-spacing:1px;}
+.key-icon{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  color:var(--primary);filter:drop-shadow(0 0 6px var(--primary-glow));
+}
+.key-actions{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  display:flex;gap:6px;
+}
+.key-actions button{
+  background:transparent;border:none;color:var(--muted);
+  cursor:pointer;padding:4px 6px;
+  display:flex;align-items:center;justify-content:center;
+}
+.key-actions button:active{color:var(--primary);}
+.key-status{
+  display:flex;justify-content:space-between;
+  padding:10px 14px;border-radius:10px;
+  background:rgba(0,0,0,.4);
+  border:1px dashed var(--line-2);
+  font-size:11px;margin-bottom:16px;align-items:center;
+}
+.key-status .label{color:var(--muted);letter-spacing:1px;font-weight:700;}
+.key-status .value{font-weight:800;}
+
+/* ===== LOADING (có ảnh trong vòng tròn) ===== */
+.loading-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(2,10,20,.95);
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;
+}
+.loading-overlay.show{display:flex;}
+.loading-ring-wrap{
+  position:relative;
+  width:80px;height:80px;
+  display:flex;align-items:center;justify-content:center;
+}
+.loading-ring{
+  position:absolute;inset:0;
+  border-radius:50%;
+  border:3px solid rgba(0,212,255,.15);
+  border-top-color:var(--primary);
+  border-right-color:var(--violet);
+  animation:spin 1s linear infinite;
+  box-shadow:0 0 26px var(--primary-glow),0 0 50px rgba(139,93,255,.4);
+}
+.loading-avatar{
+  width:60px;height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--primary);
+  box-shadow:0 0 16px var(--primary-glow),inset 0 0 10px rgba(0,0,0,.5);
+  position:relative;z-index:1;
+  background:#0b2447;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:12px;letter-spacing:2px;color:var(--primary);font-weight:700;}
+
+/* ===== DASHBOARD ===== */
+.acct-card{
+  background:linear-gradient(135deg,rgba(0,212,255,.14) 0%,rgba(74,127,255,.12) 50%,rgba(139,93,255,.14) 100%);
+  border:1px solid var(--primary);
+  box-shadow:0 0 26px rgba(0,212,255,.35),inset 0 0 30px rgba(0,212,255,.06);
+}
+.acct-row{
+  display:flex;justify-content:space-between;
+  padding:8px 0;font-size:11px;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+}
+.acct-row:last-child{border:none;}
+.acct-row .k{color:var(--muted);letter-spacing:1px;font-weight:600;}
+.acct-row .v{font-weight:800;color:#fff;}
+.system-status{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;color:#00ffc8;font-weight:800;
+  letter-spacing:1.2px;margin-top:12px;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#00ffc8;box-shadow:0 0 12px #00ffc8,0 0 24px rgba(0,255,200,.5);
+  animation:blink 1.5s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+/* ===== SEARCH ===== */
+.search-box{position:relative;margin:12px 0;}
+.search-box input{
+  width:100%;padding:13px 16px 13px 42px;
+  background:rgba(0,0,0,.5);
+  border:1.5px solid var(--line-2);
+  border-radius:12px;color:#fff;font-size:13px;
+  outline:none;transition:border-color .2s,box-shadow .2s;font-weight:600;
+}
+.search-box input:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 18px rgba(0,212,255,.4);
+}
+.search-box .search-ic{
+  position:absolute;left:14px;top:50%;
+  transform:translateY(-50%);color:var(--primary);
+  pointer-events:none;filter:drop-shadow(0 0 6px var(--primary-glow));
+}
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.brand-chip{
+  padding:12px 6px;text-align:center;
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1px solid var(--line-2);
+  border-radius:12px;
+  font-size:10px;font-weight:800;letter-spacing:.5px;
+  cursor:pointer;transition:all .18s;color:var(--text-soft);
+}
+.brand-chip:active{transform:scale(.95);}
+.brand-chip.active{
+  border-color:var(--primary);
+  background:linear-gradient(145deg,rgba(0,212,255,.18),rgba(74,127,255,.12));
+  box-shadow:0 0 18px rgba(0,212,255,.45),inset 0 0 14px rgba(0,212,255,.1);
+  color:var(--primary);
+}
+.model-list{display:flex;flex-direction:column;gap:6px;}
+.model-item{
+  padding:13px 14px;border-radius:12px;
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1px solid var(--line-2);
+  font-size:12px;font-weight:700;
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;transition:all .18s;color:var(--text-soft);
+}
+.model-item:active{transform:scale(.98);border-color:var(--primary);}
+.model-item.active{
+  border-color:var(--primary);
+  background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(74,127,255,.12));
+  box-shadow:0 0 14px rgba(0,212,255,.35);color:#fff;
+}
+.model-item .chev{color:var(--primary);}
+
+/* ===== OPTIONS ===== */
+.opt-group{margin:14px 0;}
+.opt-label{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  color:var(--muted);margin-bottom:8px;
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.opt-label .ic{color:var(--primary);width:14px;height:14px;filter:drop-shadow(0 0 6px var(--primary-glow));}
+.opt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.opt-card{
+  padding:14px 6px;text-align:center;
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1.5px solid var(--line-2);
+  border-radius:12px;cursor:pointer;transition:all .18s;
+  font-size:11px;font-weight:800;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--text-soft);
+}
+.opt-card .ic{color:var(--muted);transition:color .18s;}
+.opt-card:active{transform:scale(.95);}
+.opt-card.active{
+  border-color:var(--primary);
+  background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(74,127,255,.15));
+  box-shadow:0 0 20px rgba(0,212,255,.5),inset 0 0 16px rgba(0,212,255,.1);
+  color:var(--primary);
+}
+.opt-card.active .ic{color:var(--primary);filter:drop-shadow(0 0 6px var(--primary-glow));}
+
+/* ===== SENSITIVITY ===== */
+.sens-item{
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1px solid var(--line-2);
+  border-radius:14px;padding:16px 18px;margin-bottom:10px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:border-color .2s,box-shadow .2s;
+  box-shadow:inset 0 1px 0 rgba(0,212,255,.08);
+}
+.sens-item:active{
+  border-color:var(--primary);
+  box-shadow:0 0 18px rgba(0,212,255,.35),inset 0 0 14px rgba(0,212,255,.08);
+}
+.sens-name{
+  font-size:12px;font-weight:800;letter-spacing:1.5px;
+  color:var(--muted);text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.sens-name .ic{color:var(--primary);}
+.sens-val{
+  font-size:22px;font-weight:900;color:var(--primary);
+  text-shadow:0 0 16px var(--primary-glow),0 0 30px rgba(0,212,255,.4);
+  min-width:56px;text-align:right;
+}
+
+/* ===== QUICK RESULT ===== */
+.quick-result{margin-top:14px;animation:qrIn .5s ease;}
+@keyframes qrIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.qr-header{
+  display:flex;align-items:center;gap:10px;padding:14px;
+  border-radius:14px 14px 0 0;
+  background:linear-gradient(135deg,rgba(0,212,255,.28),rgba(74,127,255,.22),rgba(139,93,255,.2));
+  border:1px solid var(--primary);border-bottom:none;
+}
+.qr-header .icon{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(135deg,#00d4ff,#4a7fff,#8b5dff);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px var(--primary-glow),inset 0 1px 0 rgba(255,255,255,.3);
+  color:#fff;
+}
+.qr-header .txt{flex:1;}
+.qr-header .name{font-size:13px;font-weight:900;letter-spacing:.5px;color:#fff;}
+.qr-header .plat{font-size:9px;color:#a8d4ff;letter-spacing:1.5px;margin-top:2px;font-weight:800;}
+.qr-body{
+  border:1px solid var(--primary);border-top:none;
+  border-radius:0 0 14px 14px;padding:12px;
+  background:linear-gradient(180deg,rgba(0,212,255,.06),rgba(10,30,56,.6));
+}
+.qr-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 4px;
+  border-bottom:1px dashed rgba(0,212,255,.12);
+  font-size:12px;
+}
+.qr-row:last-child{border:none;}
+.qr-row .lbl{
+  color:var(--muted);font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;display:flex;align-items:center;gap:6px;
+}
+.qr-row .lbl .ic{color:var(--primary);width:14px;height:14px;}
+.qr-row .val{
+  font-size:18px;font-weight:900;
+  min-width:52px;text-align:right;text-shadow:0 0 12px currentColor;
+}
+.qr-row .val.hi{color:#00ffe0;}
+.qr-row .val.mid{color:#5fa8ff;}
+.qr-row .val.low{color:#00ffc8;}
+.qr-note{font-size:9px;color:#5a7a9a;text-align:center;margin-top:10px;letter-spacing:.5px;line-height:1.6;}
+.qr-actions{display:flex;gap:8px;margin-top:12px;}
+.qr-actions button{
+  flex:1;padding:12px;border-radius:12px;border:none;
+  font-size:11px;font-weight:800;letter-spacing:1px;cursor:pointer;
+  transition:transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.qr-actions button:active{transform:scale(.96);}
+.qr-actions .save{
+  background:linear-gradient(135deg,#00d4ff,#4a7fff,#8b5dff);color:#fff;
+  box-shadow:0 0 18px var(--primary-glow),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.qr-actions .detail{background:rgba(0,212,255,.08);color:#fff;border:1px solid var(--line-2);}
+
+/* ===== PROFILE ===== */
+.profile-item{
+  padding:14px;border-radius:14px;
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1px solid var(--line-2);
+  margin-bottom:10px;
+  box-shadow:inset 0 1px 0 rgba(0,212,255,.08);
+}
+.profile-item .name{font-size:13px;font-weight:800;letter-spacing:1px;color:#fff;}
+.profile-item .meta{font-size:10px;color:var(--muted);margin:4px 0 10px;}
+.profile-actions{display:flex;gap:6px;}
+.profile-actions button{
+  flex:1;padding:8px;border-radius:8px;
+  background:rgba(0,212,255,.06);
+  border:1px solid var(--line-2);
+  color:#fff;font-size:10px;font-weight:800;
+  letter-spacing:.5px;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+}
+.profile-actions button:active{transform:scale(.95);}
+.profile-actions .apply{border-color:var(--primary);color:var(--primary);box-shadow:0 0 10px rgba(0,212,255,.25);}
+.profile-actions .del{border-color:rgba(255,59,107,.4);color:#ff5570;}
+
+/* ===== COMPARE ===== */
+.compare-select{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;}
+.compare-select select{
+  width:100%;padding:10px;border-radius:10px;
+  background:var(--card-2);border:1px solid var(--line-2);
+  color:#fff;font-size:11px;outline:none;
+}
+.compare-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 0;font-size:10px;
+  border-bottom:1px dashed rgba(0,212,255,.1);
+}
+.compare-bar .lbl{width:52px;color:var(--muted);font-weight:800;}
+.compare-bar .bar{
+  flex:1;height:8px;border-radius:4px;
+  background:rgba(0,0,0,.4);overflow:hidden;position:relative;
+}
+.compare-bar .fill{height:100%;border-radius:4px;transition:width .5s ease;box-shadow:0 0 8px currentColor;}
+.fill.a{background:linear-gradient(90deg,#00d4ff,#00ffe0);color:#00d4ff;}
+.fill.b{background:linear-gradient(90deg,#4a7fff,#8b5dff);color:#4a7fff;}
+.compare-bar .num{width:30px;text-align:right;font-weight:800;color:#fff;}
+
+/* ===== HISTORY ===== */
+.history-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px;border-radius:12px;
+  background:linear-gradient(145deg,var(--card-2),var(--card));
+  border:1px solid var(--line-2);margin-bottom:8px;
+}
+.history-item .h-name{font-size:12px;font-weight:700;color:var(--text-soft);}
+.history-item .h-date{font-size:9px;color:var(--muted);margin-top:2px;}
+.history-item .h-icon{color:var(--primary);opacity:.8;filter:drop-shadow(0 0 6px var(--primary-glow));}
+
+/* ===== DRAWER ===== */
+#drawer{
+  position:fixed;top:0;left:0;bottom:0;
+  width:270px;z-index:150;
+  background:linear-gradient(180deg,#0b2447 0%,#020a14 100%);
+  border-right:1px solid var(--primary);
+  transform:translateX(-100%);
+  transition:transform .3s ease;
+  box-shadow:8px 0 40px rgba(0,0,0,.9),0 0 50px rgba(0,212,255,.2);
+  display:flex;flex-direction:column;
+}
+#drawer.open{transform:translateX(0);}
+.drawer-head{
+  padding:24px 20px;border-bottom:1px solid var(--line-2);
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(139,93,255,.08));
+}
+.drawer-head img{
+  width:46px;height:46px;border-radius:11px;
+  object-fit:cover;border:1.5px solid var(--primary);
+  box-shadow:0 0 18px var(--primary-glow);
+}
+.drawer-head .txt h2{
+  font-size:15px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,#fff,#00d4ff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.drawer-head .txt p{font-size:9px;letter-spacing:3px;color:var(--muted);margin-top:2px;}
+.drawer-nav{flex:1;overflow-y:auto;padding:12px 0;scrollbar-width:none;}
+.drawer-nav::-webkit-scrollbar{display:none;}
+.drawer-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 20px;font-size:12px;font-weight:700;
+  letter-spacing:1px;cursor:pointer;
+  color:#8aa8cc;transition:all .18s;
+  border-left:3px solid transparent;
+}
+.drawer-item .ic{color:#5a7fa8;transition:color .18s;}
+.drawer-item:active{background:rgba(0,212,255,.1);}
+.drawer-item.active{
+  color:var(--primary);border-left-color:var(--primary);
+  background:rgba(0,212,255,.08);
+}
+.drawer-item.active .ic{color:var(--primary);}
+.drawer-item.logout{
+  color:#ff5570;border-top:1px solid var(--line);
+  margin-top:8px;padding-top:16px;
+}
+.drawer-item.logout .ic{color:#ff5570;}
+.drawer-item.logout:active{background:rgba(255,59,107,.1);}
+#overlay{
+  position:fixed;inset:0;z-index:140;
+  background:rgba(0,0,0,.8);
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+#overlay.show{opacity:1;pointer-events:auto;}
+
+/* ===== TOAST ===== */
+#toast{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%) translateY(-100px);
+  z-index:300;padding:12px 22px;border-radius:12px;
+  background:rgba(7,27,51,.98);
+  border:1px solid var(--primary);
+  box-shadow:0 0 26px rgba(0,212,255,.5);
+  font-size:12px;font-weight:700;letter-spacing:1px;
+  transition:transform .3s ease;white-space:nowrap;
+  max-width:90vw;color:#fff;
+}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.ok{border-color:#00ffc8;box-shadow:0 0 26px rgba(0,255,200,.5);color:#00ffc8;}
+#toast.err{border-color:#ff3b6b;color:#ff5570;box-shadow:0 0 26px rgba(255,59,107,.5);}
+#toast.warn{border-color:#ffb547;color:#ffb547;box-shadow:0 0 26px rgba(255,181,71,.5);}
+
+/* ===== SECTION TITLE ===== */
+.sec-title{
+  font-size:12px;font-weight:800;letter-spacing:2px;
+  color:var(--muted);margin:18px 0 10px;
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.sec-title .ic{color:var(--primary);width:14px;height:14px;}
+
+/* ===== ANALYZING ===== */
+#analyzing{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(2,10,20,.96);
+  display:none;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;
+}
+#analyzing.show{display:flex;}
+.analyzing-ring{
+  width:90px;height:90px;border-radius:50%;
+  border:3px solid rgba(0,212,255,.15);
+  border-top-color:var(--primary);
+  border-right-color:var(--violet);
+  animation:spin 1s linear infinite;
+  box-shadow:0 0 30px var(--primary-glow),0 0 60px rgba(139,93,255,.4);
+}
+.analyzing-text{
+  font-size:12px;letter-spacing:2px;color:var(--primary);
+  font-weight:700;min-height:18px;
+}
+.progress-bar{
+  width:220px;height:4px;border-radius:2px;
+  background:var(--line);overflow:hidden;
+}
+.progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#00d4ff,#4a7fff,#8b5dff);
+  transition:width .3s ease;
+  box-shadow:0 0 10px var(--primary-glow);
+}
+
+/* ===== DEVICE PROFILE ===== */
+.dp-row{
+  display:flex;justify-content:space-between;
+  padding:9px 0;font-size:11px;
+  border-bottom:1px dashed rgba(0,212,255,.1);
+}
+.dp-row:last-child{border:none;}
+.dp-row .k{color:var(--muted);}
+.dp-row .v{font-weight:800;color:#fff;text-align:right;max-width:60%;}
+
+/* ===== VIP ===== */
+.vip-card{
+  background:linear-gradient(135deg,rgba(0,212,255,.16),rgba(74,127,255,.15),rgba(139,93,255,.16));
+  border:1px solid var(--cyan);
+  box-shadow:0 0 30px rgba(0,212,255,.35),inset 0 0 30px rgba(0,212,255,.06);
+  text-align:center;padding:24px 16px;
+}
+.vip-card .crown{
+  color:var(--cyan);
+  display:inline-block;margin-bottom:10px;
+  filter:drop-shadow(0 0 14px var(--primary-glow));
+}
+.vip-card h2{
+  font-size:20px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,#00ffe0,#00d4ff,#4a7fff,#8b5dff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ===== EMPTY ===== */
+.empty{text-align:center;padding:30px 16px;color:var(--muted);font-size:11px;}
+.empty .em{color:var(--line);display:block;margin-bottom:10px;}
+.empty .em .ic{width:36px;height:36px;stroke-width:1.5;}
+
+/* ===== SCROLL HINT ===== */
+#scrollHint{
+  position:fixed;bottom:14px;left:50%;
+  transform:translateX(-50%);
+  font-size:9px;letter-spacing:2px;
+  color:var(--muted);opacity:.6;
+  z-index:100;pointer-events:none;
+  transition:opacity .3s;
+}
+#scrollHint.hide{opacity:0;}
+</style>
+</head>
+<body>
+
+<div id="bgGrid"></div>
+<div id="bgGlow"></div>
+<div id="bgVignette"></div>
+
+<!-- SVG ICON SPRITE -->
+<svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.5 12.5l9-9M17 5l3 3M14 8l2 2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18h20M3 18l-1.5-9 5.5 4L12 6l5 7 5.5-4L21 18"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-device" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M2 18c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/></symbol>
+  <symbol id="i-balance" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 8l7-5 7 5"/><path d="M5 8l-3 7c2 2 4 2 6 0z"/><path d="M19 8l-3 7c2 2 4 2 6 0z"/></symbol>
+  <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></symbol>
+  <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/></symbol>
+  <symbol id="i-binocular" viewBox="0 0 24 24"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M10 15V8a2 2 0 0 1 4 0v7"/><path d="M2 15V9a2 2 0 0 1 2-2h3"/><path d="M22 15V9a2 2 0 0 0-2-2h-3"/></symbol>
+  <symbol id="i-telescope" viewBox="0 0 24 24"><path d="M2 8l18-5-3 14-8-3z"/><line x1="11" y1="14" x2="14" y2="21"/><line x1="8" y1="21" x2="14" y2="21"/></symbol>
+  <symbol id="i-sniper" viewBox="0 0 24 24"><path d="M12 2v3"/><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/><circle cx="12" cy="10" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-freelook" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 5a15 15 0 0 1 0 14M12 5a15 15 0 0 0 0 14"/><path d="M4 9c3 1 13 1 16 0M4 15c3-1 13-1 16 0"/></symbol>
+  <symbol id="i-phone-sm" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="1.5"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></symbol>
+  <symbol id="i-phone-md" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></symbol>
+  <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+</svg>
+
+<!-- ===== SCROLLER ===== -->
+<div id="scroller">
+  <div id="app">
+
+    <!-- LOGIN -->
+    <div class="screen active" id="loginScreen">
+      <div class="screen-inner">
+        <div class="login-logo">
+          <img class="logo-img" src="https://i.imgur.com/s5j7Orr.jpeg" alt="KAITOKID">
+          <h1>KAITOKID</h1>
+          <p>VIP LOGIN</p>
+        </div>
+        <div class="card neon">
+          <div class="card-title"><svg class="ic"><use href="#i-lock"/></svg> XÁC THỰC KEY</div>
+          <div class="card-desc" style="margin-bottom:14px;">Nhập KEY để truy cập hệ thống tìm độ nhạy.</div>
+          <div class="key-wrap">
+            <span class="key-icon"><svg class="ic"><use href="#i-key"/></svg></span>
+            <input type="text" id="keyInput" placeholder="Nhập KEY của bạn..." autocomplete="off" spellcheck="false">
+            <div class="key-actions">
+              <button id="toggleKey" type="button"><svg class="ic" id="eyeIcon"><use href="#i-eye"/></svg></button>
+            </div>
+          </div>
+          <div class="key-status">
+            <span class="label">KEY STATUS</span>
+            <span class="value" id="keyStatus" style="color:#7a9bc8;">Chưa xác thực</span>
+          </div>
+          <button class="btn" id="loginBtn"><svg class="ic"><use href="#i-lock"/></svg> ĐĂNG NHẬP</button>
+        </div>
+
+        <!-- INFO KEY -->
+        <div class="sec-title"><svg class="ic"><use href="#i-info"/></svg> THÔNG TIN KEY</div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-gift"/></svg> KEY THƯỜNG</div>
+          <div class="card-desc" style="margin-top:6px;">
+            • Mỗi KEY dùng được <b style="color:#00d4ff;">3 ngày</b><br>
+            • Mỗi KEY nhập tối đa <b style="color:#ffb547;">10 lần</b><br>
+            • Hết thời gian cần nhập KEY mới
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-crown"/></svg> KEY ADMIN</div>
+          <div class="card-desc" style="margin-top:6px;">
+            • Dùng <b style="color:#00ffc8;">vô hạn lần</b><br>
+            • Không giới hạn thời gian<br>
+            • Dành cho quản trị viên
+          </div>
+        </div>
+
+        <!-- HƯỚNG DẪN -->
+        <div class="sec-title"><svg class="ic"><use href="#i-shield"/></svg> HƯỚNG DẪN</div>
+        <div class="card">
+          <div class="card-desc">1. Nhập KEY vào ô phía trên</div>
+        </div>
+        <div class="card">
+          <div class="card-desc">2. Bấm ĐĂNG NHẬP để vào hệ thống</div>
+        </div>
+        <div class="card">
+          <div class="card-desc">3. Chọn thiết bị và tạo độ nhạy tham khảo</div>
+        </div>
+        <div class="card">
+          <div class="card-desc">4. Lưu profile và so sánh khi cần</div>
+        </div>
+        <div class="card" style="text-align:center;color:var(--muted);font-size:10px;padding:20px;">
+          — KAITOKID VIP © 2026 —<br>
+          <span style="font-size:9px;opacity:.6;">phiên bản 2.1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="screen" id="dashboardScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div>
+            <div class="title">KAITOKID</div>
+            <div class="subtitle">SENSITIVITY CENTER</div>
+          </div>
+        </div>
+
+        <div class="card acct-card">
+          <div class="between" style="margin-bottom:10px;">
+            <div class="card-title" style="color:var(--primary);"><svg class="ic"><use href="#i-crown"/></svg> TÀI KHOẢN</div>
+            <span class="badge green" id="acctBadge"><svg class="ic"><use href="#i-check"/></svg>ACTIVE</span>
+          </div>
+          <div class="acct-row"><span class="k">STATUS</span><span class="v" id="dashStatus" style="color:#00ffc8;">ACTIVE</span></div>
+          <div class="acct-row"><span class="k">KEY</span><span class="v" id="dashKey">••••••••••</span></div>
+          <div class="acct-row"><span class="k">LOẠI KEY</span><span class="v" id="dashKeyType">—</span></div>
+          <div class="acct-row"><span class="k">EXPIRATION</span><span class="v" id="dashExp">—</span></div>
+          <div class="acct-row"><span class="k">LƯỢT CÒN LẠI</span><span class="v" id="dashUses">—</span></div>
+          <div class="acct-row"><span class="k">DEVICE</span><span class="v" id="dashDevice">—</span></div>
+          <div class="system-status"><span class="dot"></span> SYSTEM ONLINE</div>
+        </div>
+
+        <div class="card neon press" onclick="go('findScreen')">
+          <div class="card-title" style="color:var(--primary);"><svg class="ic"><use href="#i-target"/></svg> SMART SENSITIVITY</div>
+          <div class="card-desc" style="margin:8px 0 14px;">
+            Chọn thiết bị để hệ thống tạo cấu hình độ nhạy tham khảo phù hợp với màn hình và cách điều khiển của bạn.
+          </div>
+          <button class="btn"><svg class="ic"><use href="#i-zap"/></svg> BẮT ĐẦU TÌM ĐỘ NHẠY</button>
+        </div>
+
+        <div class="row" style="gap:10px;">
+          <div class="card press" style="flex:1;text-align:center;padding:14px;" onclick="go('profileScreen')">
+            <svg class="ic ic-lg" style="color:var(--primary);"><use href="#i-target"/></svg>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1px;margin-top:6px;">MY PROFILE</div>
+          </div>
+          <div class="card press" style="flex:1;text-align:center;padding:14px;" onclick="go('historyScreen')">
+            <svg class="ic ic-lg" style="color:var(--primary);"><use href="#i-history"/></svg>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1px;margin-top:6px;">HISTORY</div>
+          </div>
+          <div class="card press" style="flex:1;text-align:center;padding:14px;" onclick="go('statsScreen')">
+            <svg class="ic ic-lg" style="color:var(--primary);"><use href="#i-chart"/></svg>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1px;margin-top:6px;">STATS</div>
+          </div>
+        </div>
+
+        <div class="sec-title"><svg class="ic"><use href="#i-info"/></svg> GỢI Ý NHANH</div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-zap"/></svg> TỐI ƯU THEO THIẾT BỊ</div>
+          <div class="card-desc">Hệ thống phân tích tần số quét, kích thước màn hình và hệ điều hành để đưa ra cấu hình độ nhạy tham khảo.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-shield"/></svg> AN TOÀN & BẢO MẬT</div>
+          <div class="card-desc">KEY được lưu cục bộ trên thiết bị, không chia sẻ ra ngoài. Bạn có thể đăng xuất bất kỳ lúc nào.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-chart"/></svg> SO SÁNH PROFILE</div>
+          <div class="card-desc">Lưu nhiều profile cho từng dòng máy và so sánh trực quan bằng biểu đồ.</div>
+        </div>
+        <div class="card" style="text-align:center;color:var(--muted);font-size:10px;padding:20px;">
+          — HẾT DASHBOARD —
+        </div>
+      </div>
+    </div>
+
+    <!-- FIND SENSITIVITY -->
+    <div class="screen" id="findScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">TÌM ĐỘ NHẠY</div><div class="subtitle">Chọn thiết bị của bạn</div></div>
+        </div>
+
+        <div class="search-box">
+          <svg class="ic search-ic"><use href="#i-search"/></svg>
+          <input type="text" id="deviceSearch" placeholder="Tìm tên điện thoại...">
+        </div>
+
+        <div class="sec-title"><svg class="ic"><use href="#i-grid"/></svg> Hãng sản xuất</div>
+        <div class="brand-grid" id="brandGrid"></div>
+
+        <div class="sec-title" id="modelTitle"><svg class="ic"><use href="#i-device"/></svg> Dòng máy</div>
+        <div class="model-list" id="modelList">
+          <div class="empty"><span class="em"><svg class="ic"><use href="#i-device"/></svg></span>Chọn hãng để xem dòng máy</div>
+        </div>
+
+        <div id="quickResult"></div>
+
+        <div class="sec-title"><svg class="ic"><use href="#i-info"/></svg> MẸO CHỌN MÁY</div>
+        <div class="card">
+          <div class="card-desc">Chọn đúng dòng máy để hệ thống tính chính xác dải độ nhạy. iPhone tối đa 150, Android tối đa 200.</div>
+        </div>
+        <div class="card">
+          <div class="card-desc">Không tìm thấy máy? Hãy chọn dòng tương đương cùng kích thước màn hình và tần số quét.</div>
+        </div>
+        <div class="card" style="text-align:center;color:var(--muted);font-size:10px;padding:20px;">
+          — HẾT DANH SÁCH —
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="screen" id="configScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">CẤU HÌNH</div><div class="subtitle">Thông tin & phong cách</div></div>
+        </div>
+
+        <div class="card neon">
+          <div class="card-title" style="color:var(--primary);"><svg class="ic"><use href="#i-device"/></svg> DEVICE PROFILE</div>
+          <div id="deviceProfile" style="margin-top:10px;"></div>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label"><svg class="ic"><use href="#i-target"/></svg> CONTROL</div>
+          <div class="opt-grid" data-group="control">
+            <div class="opt-card" data-val="Smooth"><svg class="ic"><use href="#i-wave"/></svg>Smooth</div>
+            <div class="opt-card active" data-val="Balanced"><svg class="ic"><use href="#i-balance"/></svg>Balanced</div>
+            <div class="opt-card" data-val="Fast"><svg class="ic"><use href="#i-zap"/></svg>Fast</div>
+          </div>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label"><svg class="ic"><use href="#i-play"/></svg> PLAY STYLE</div>
+          <div class="opt-grid" data-group="playstyle">
+            <div class="opt-card active" data-val="Precision"><svg class="ic"><use href="#i-crosshair"/></svg>Precision</div>
+            <div class="opt-card" data-val="Balanced"><svg class="ic"><use href="#i-balance"/></svg>Balanced</div>
+            <div class="opt-card" data-val="Fast Response"><svg class="ic"><use href="#i-zap"/></svg>Fast</div>
+          </div>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label"><svg class="ic"><use href="#i-device"/></svg> SCREEN</div>
+          <div class="opt-grid" data-group="screen">
+            <div class="opt-card" data-val="Small"><svg class="ic"><use href="#i-phone-sm"/></svg>Small</div>
+            <div class="opt-card active" data-val="Medium"><svg class="ic"><use href="#i-phone-md"/></svg>Medium</div>
+            <div class="opt-card" data-val="Large"><svg class="ic"><use href="#i-desktop"/></svg>Large</div>
+          </div>
+        </div>
+
+        <button class="btn" id="generateBtn" style="margin-top:14px;"><svg class="ic"><use href="#i-zap"/></svg> GENERATE SENSITIVITY</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="screen" id="resultScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">YOUR SENSITIVITY</div><div class="subtitle" id="resultDevice">—</div></div>
+        </div>
+
+        <div id="sensList"></div>
+
+        <div class="card" style="margin-top:14px;">
+          <div class="card-title"><svg class="ic"><use href="#i-save"/></svg> SAVE PROFILE</div>
+          <div class="card-desc" style="margin:8px 0 12px;">Lưu cấu hình để dùng lại sau.</div>
+          <input type="text" id="profileName" placeholder="KAITOKID PROFILE 01" style="width:100%;padding:12px;border-radius:10px;background:rgba(0,0,0,.5);border:1px solid var(--line-2);color:#fff;font-size:13px;outline:none;margin-bottom:10px;font-weight:600;">
+          <button class="btn" id="saveProfileBtn"><svg class="ic"><use href="#i-save"/></svg> LƯU CẤU HÌNH</button>
+        </div>
+
+        <button class="btn ghost" style="margin-top:10px;" onclick="go('configScreen')"><svg class="ic"><use href="#i-arrow-left"/></svg> CHỈNH LẠI</button>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="screen" id="profileScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">MY PROFILE</div><div class="subtitle">Cấu hình đã lưu</div></div>
+          <button class="btn ghost small" style="margin-left:auto;" onclick="go('compareScreen')">SO SÁNH</button>
+        </div>
+        <div id="profileList"></div>
+      </div>
+    </div>
+
+    <!-- COMPARE -->
+    <div class="screen" id="compareScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">COMPARE</div><div class="subtitle">So sánh 2 cấu hình</div></div>
+        </div>
+        <div class="compare-select">
+          <select id="cmpA"></select>
+          <select id="cmpB"></select>
+        </div>
+        <div id="compareResult"></div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="screen" id="historyScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">HISTORY</div><div class="subtitle">Lịch sử tìm kiếm</div></div>
+          <button class="btn ghost small" style="margin-left:auto;" onclick="clearHistory()"><svg class="ic"><use href="#i-trash"/></svg> XÓA</button>
+        </div>
+        <div id="historyList"></div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="screen" id="statsScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">STATISTICS</div><div class="subtitle">Thống kê sử dụng</div></div>
+        </div>
+        <div id="statsContent"></div>
+      </div>
+    </div>
+
+    <!-- VIP -->
+    <div class="screen" id="vipScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">VIP</div><div class="subtitle">Trạng thái thành viên</div></div>
+        </div>
+        <div class="card vip-card">
+          <svg class="ic crown" style="width:48px;height:48px;"><use href="#i-crown"/></svg>
+          <h2 id="vipTitle">KAITOKID VIP</h2>
+          <p style="font-size:11px;color:var(--muted);margin-top:8px;" id="vipSubtitle">Tài khoản đang hoạt động</p>
+          <div style="margin-top:16px;text-align:left;">
+            <div class="dp-row"><span class="k">STATUS</span><span class="v" id="vipStatus" style="color:#00ffc8;">ACTIVE</span></div>
+            <div class="dp-row"><span class="k">LOẠI KEY</span><span class="v" id="vipType">—</span></div>
+            <div class="dp-row"><span class="k">KEY</span><span class="v" id="vipKey">—</span></div>
+            <div class="dp-row"><span class="k">EXPIRATION</span><span class="v" id="vipExp">—</span></div>
+            <div class="dp-row"><span class="k">LƯỢT CÒN LẠI</span><span class="v" id="vipUses">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEY -->
+    <div class="screen" id="keyScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">KEY</div><div class="subtitle">Thông tin KEY</div></div>
+        </div>
+        <div class="card">
+          <div class="dp-row"><span class="k">KEY</span><span class="v" id="keyInfoKey">—</span></div>
+          <div class="dp-row"><span class="k">LOẠI</span><span class="v" id="keyInfoType">—</span></div>
+          <div class="dp-row"><span class="k">STATUS</span><span class="v" id="keyInfoStatus" style="color:#00ffc8;">ACTIVE</span></div>
+          <div class="dp-row"><span class="k">EXPIRATION</span><span class="v" id="keyInfoExp">—</span></div>
+          <div class="dp-row"><span class="k">LƯỢT CÒN LẠI</span><span class="v" id="keyInfoUses">—</span></div>
+        </div>
+        <button class="btn danger" onclick="confirmLogout()"><svg class="ic"><use href="#i-logout"/></svg> ĐĂNG XUẤT</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="screen" id="settingsScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">SETTINGS</div><div class="subtitle">Cài đặt ứng dụng</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-settings"/></svg> CÀI ĐẶT</div>
+          <div class="card-desc" style="margin-top:8px;">
+            • Phiên bản: 2.1.0<br>
+            • Chế độ: Reference Only<br>
+            • Ngôn ngữ: Tiếng Việt<br>
+            • Hiệu ứng: Bật
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg class="ic"><use href="#i-info"/></svg> LƯU Ý</div>
+          <div class="card-desc" style="margin-top:8px;">
+            Ứng dụng chỉ tạo các giá trị độ nhạy tham khảo dựa trên thông tin thiết bị và lựa chọn của người dùng. Không tự động thay đổi file game, can thiệp vào game hoặc thực hiện thao tác thay người chơi.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVICE -->
+    <div class="screen" id="deviceScreen">
+      <div class="screen-inner">
+        <div class="header">
+          <div class="menu-btn" onclick="openDrawer()"><span></span><span></span><span></span></div>
+          <div><div class="title">DEVICE</div><div class="subtitle">Thông tin thiết bị</div></div>
+        </div>
+        <div class="card">
+          <div id="deviceInfoContent"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div id="overlay" onclick="closeDrawer()"></div>
+<div id="drawer">
+  <div class="drawer-head">
+    <img src="https://i.imgur.com/s5j7Orr.jpeg" alt="KAITOKID">
+    <div class="txt">
+      <h2>KAITOKID VIP</h2>
+      <p>SENSITIVITY CENTER</p>
+    </div>
+  </div>
+  <div class="drawer-nav">
+    <div class="drawer-item active" data-screen="dashboardScreen"><svg class="ic"><use href="#i-home"/></svg>HOME</div>
+    <div class="drawer-item" data-screen="findScreen"><svg class="ic"><use href="#i-search"/></svg>FIND SENSITIVITY</div>
+    <div class="drawer-item" data-screen="profileScreen"><svg class="ic"><use href="#i-target"/></svg>MY PROFILE</div>
+    <div class="drawer-item" data-screen="deviceScreen"><svg class="ic"><use href="#i-device"/></svg>DEVICE</div>
+    <div class="drawer-item" data-screen="statsScreen"><svg class="ic"><use href="#i-chart"/></svg>STATISTICS</div>
+    <div class="drawer-item" data-screen="historyScreen"><svg class="ic"><use href="#i-history"/></svg>HISTORY</div>
+    <div class="drawer-item" data-screen="vipScreen"><svg class="ic"><use href="#i-crown"/></svg>VIP</div>
+    <div class="drawer-item" data-screen="keyScreen"><svg class="ic"><use href="#i-key"/></svg>KEY</div>
+    <div class="drawer-item" data-screen="settingsScreen"><svg class="ic"><use href="#i-settings"/></svg>SETTINGS</div>
+    <div class="drawer-item logout" onclick="confirmLogout()"><svg class="ic"><use href="#i-logout"/></svg>ĐĂNG XUẤT</div>
+  </div>
+</div>
+
+<!-- ANALYZING -->
+<div id="analyzing">
+  <div class="analyzing-ring"></div>
+  <div class="analyzing-text" id="analyzingText">Đang tạo độ nhạy...</div>
+  <div class="progress-bar"><div class="progress-fill" id="analyzingProgress"></div></div>
+</div>
+
+<!-- LOADING (có ảnh trong vòng tròn) -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-ring-wrap">
+    <div class="loading-ring"></div>
+    <img class="loading-avatar" src="https://i.imgur.com/IO2gBZx.jpeg" alt="Loading">
+  </div>
+  <div class="loading-text" id="loadingText">Đang xác thực KEY...</div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- SCROLL HINT -->
+<div id="scrollHint"><svg class="ic ic-sm" style="vertical-align:-3px;"><use href="#i-chevron-down"/></svg> VUỐT ĐỂ XEM THÊM</div>
+
+<script>
+/* ============================================================
+   KAITOKID SENSITIVITY VIP — v2.1
+   - Đổi "KEY VIP" → "KEY THƯỜNG" (trong info)
+   - Bỏ dòng "Thời gian lưu cục bộ, không reset khi thoát app"
+   - Loading có ảnh avatar trong vòng tròn
+   ============================================================ */
+
+// ===== KEY DATA =====
+const NORMAL_KEYS = [
+  "KAITOKID-N4ZT-6QMX-9WPD",
+  "KAITOKID-3KRV-8LXN-5QTA",
+  "KAITOKID-9PQM-4VZT-7XNK",
+  "KAITOKID-6WDX-2RQP-8MZT",
+  "KAITOKID-K7NX-9QVL-3RMP",
+  "KAITOKID-5ZRT-8KQM-2XNV",
+  "KAITOKID-Q9MP-6XTR-4VNZ",
+  "KAITOKID-8LQX-3RKT-7MVP",
+  "KAITOKID-V4ZN-7XQM-9KRL",
+  "KAITOKID-A7QX-9MTR-2VNK"
+];
+const ADMIN_KEY = "KAITOKID-9ZQV-2LMX-8KPR-6NTQ";
+
+const NORMAL_DAYS = 3;
+const NORMAL_MAX_USES = 10;
+const NORMAL_MS = NORMAL_DAYS * 24 * 60 * 60 * 1000;
+
+// ===== DEVICE DATA =====
+const DEVICES = {
+  APPLE: ["iPhone 11","iPhone 12","iPhone 13","iPhone 14","iPhone 15","iPhone 16","iPhone SE","iPhone XR","iPhone XS"],
+  SAMSUNG: ["Galaxy S21","Galaxy S22","Galaxy S23","Galaxy S24","Galaxy A54","Galaxy A34","Galaxy M54","Galaxy Note 20","Galaxy Z Flip 5"],
+  XIAOMI: ["Redmi Note 12","Redmi Note 13","Xiaomi 12","Xiaomi 13","Xiaomi 14","POCO X5","POCO F5","Redmi 12"],
+  OPPO: ["OPPO A78","OPPO A58","OPPO Reno 10","OPPO Reno 11","OPPO Find X6","OPPO A98"],
+  VIVO: ["Vivo Y36","Vivo Y27","Vivo V29","Vivo V30","Vivo X100","Vivo T2"],
+  REALME: ["Realme C55","Realme 11","Realme 12","Realme GT 5","Realme Narzo 60"],
+  ASUS: ["ROG Phone 6","ROG Phone 7","ROG Phone 8","Zenfone 10","Zenfone 11"],
+  ONEPLUS: ["OnePlus 11","OnePlus 12","OnePlus Nord 3","OnePlus Nord CE 3","OnePlus 10 Pro"],
+  HONOR: ["Honor X9b","Honor 90","Honor Magic 5","Honor X8a","Honor 70"]
+};
+
+const DEVICE_SPECS = {
+  "iPhone 11": {screen:"6.1 inch",refresh:"60Hz",res:"828 x 1792",os:"iOS 14+"},
+  "iPhone 12": {screen:"6.1 inch",refresh:"60Hz",res:"1170 x 2532",os:"iOS 14+"},
+  "iPhone 13": {screen:"6.1 inch",refresh:"60Hz",res:"1170 x 2532",os:"iOS 15+"},
+  "iPhone 14": {screen:"6.1 inch",refresh:"60Hz",res:"1170 x 2532",os:"iOS 16+"},
+  "iPhone 15": {screen:"6.1 inch",refresh:"60Hz",res:"1179 x 2556",os:"iOS 17+"},
+  "iPhone 16": {screen:"6.1 inch",refresh:"60Hz",res:"1179 x 2556",os:"iOS 18+"},
+};
+function getBrandOf(model){
+  for(const b in DEVICES){ if(DEVICES[b].includes(model)) return b; }
+  return "UNKNOWN";
+}
+function isApple(model){ return getBrandOf(model) === "APPLE"; }
+function getSpec(model){
+  if(DEVICE_SPECS[model]) return DEVICE_SPECS[model];
+  const brand = getBrandOf(model);
+  const brands = {
+    SAMSUNG:{screen:"6.2-6.8 inch",refresh:"120Hz",res:"1080 x 2340",os:"Android 13+"},
+    XIAOMI:{screen:"6.5 inch",refresh:"120Hz",res:"1080 x 2400",os:"Android 13+"},
+    OPPO:{screen:"6.5 inch",refresh:"90Hz",res:"720 x 1612",os:"Android 13+"},
+    VIVO:{screen:"6.6 inch",refresh:"90Hz",res:"1080 x 2408",os:"Android 13+"},
+    REALME:{screen:"6.5 inch",refresh:"90Hz",res:"720 x 1600",os:"Android 13+"},
+    ASUS:{screen:"6.78 inch",refresh:"165Hz",res:"1080 x 2448",os:"Android 13+"},
+    ONEPLUS:{screen:"6.7 inch",refresh:"120Hz",res:"1080 x 2412",os:"Android 13+"},
+    HONOR:{screen:"6.7 inch",refresh:"120Hz",res:"1080 x 2412",os:"Android 13+"},
+  };
+  return brands[brand] || {screen:"Unknown",refresh:"Unknown",res:"Unknown",os:"Unknown"};
+}
+
+// ===== STATE =====
+let state = {
+  authed:false,
+  key:"",
+  keyType:"",
+  keyExp:0,
+  keyUsesLeft:0,
+  selectedBrand:null,
+  selectedDevice:null,
+  control:"Balanced", playstyle:"Precision", screen:"Medium",
+  sensitivity:{}, quickSensitivity:{},
+  profiles:[], history:[], currentScreen:"loginScreen"
+};
+
+// ===== KEY USAGE STORE =====
+function getKeyUsageStore(){
+  try{
+    const raw = localStorage.getItem("kaitokid_key_usage");
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function saveKeyUsageStore(store){
+  try{ localStorage.setItem("kaitokid_key_usage", JSON.stringify(store)); }catch(e){}
+}
+
+// ===== INIT =====
+(function init(){
+  const colors = ["#00d4ff","#4a7fff","#8b5dff","#00ffe0","#ff3d9a"];
+  for(let i=0;i<22;i++){
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random()*100 + "%";
+    p.style.bottom = "-10px";
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration = (12 + Math.random()*16) + "s";
+    p.style.animationDelay = (Math.random()*10) + "s";
+    p.style.boxShadow = "0 0 6px " + p.style.background;
+    document.body.appendChild(p);
+  }
+
+  loadState();
+  if(state.authed && isSessionValid()){
+    go("dashboardScreen");
+    updateDashboard();
+  } else {
+    if(state.authed){
+      toast("KEY đã hết hạn, vui lòng nhập lại","warn");
+    }
+    clearAuth();
+    go("loginScreen");
+  }
+
+  buildBrandGrid();
+  renderHistory();
+  renderProfiles();
+  renderStats();
+  updateDeviceInfo();
+  document.getElementById("dashDevice").textContent = getDeviceName();
+
+  document.getElementById("loginBtn").onclick = doLogin;
+  document.getElementById("keyInput").addEventListener("keydown", e=>{ if(e.key==="Enter") doLogin(); });
+  document.getElementById("toggleKey").onclick = ()=>{
+    const inp = document.getElementById("keyInput");
+    const icon = document.getElementById("eyeIcon").querySelector("use");
+    if(inp.type === "password"){
+      inp.type = "text";
+      icon.setAttribute("href","#i-eye-off");
+    } else {
+      inp.type = "password";
+      icon.setAttribute("href","#i-eye");
+    }
+  };
+
+  document.getElementById("deviceSearch").addEventListener("input", e=>{
+    const q = e.target.value.toLowerCase().trim();
+    if(!q){
+      if(state.selectedBrand) renderModels(state.selectedBrand);
+      else document.getElementById("modelList").innerHTML = '<div class="empty"><span class="em"><svg class="ic"><use href="#i-device"/></svg></span>Chọn hãng để xem dòng máy</div>';
+      return;
+    }
+    const results = [];
+    for(const b in DEVICES){
+      DEVICES[b].forEach(m=>{ if(m.toLowerCase().includes(q)) results.push({brand:b, model:m}); });
+    }
+    renderSearchResults(results);
+  });
+
+  document.querySelectorAll(".opt-grid").forEach(grid=>{
+    grid.querySelectorAll(".opt-card").forEach(card=>{
+      card.onclick = ()=>{
+        grid.querySelectorAll(".opt-card").forEach(c=>c.classList.remove("active"));
+        card.classList.add("active");
+        const g = grid.dataset.group;
+        const v = card.dataset.val;
+        if(g==="control") state.control = v;
+        if(g==="playstyle") state.playstyle = v;
+        if(g==="screen") state.screen = v;
+      };
+    });
+  });
+
+  document.getElementById("generateBtn").onclick = generateSensitivity;
+  document.getElementById("saveProfileBtn").onclick = saveProfile;
+
+  document.querySelectorAll(".drawer-item").forEach(item=>{
+    if(item.classList.contains("logout")) return;
+    item.onclick = ()=>{ go(item.dataset.screen); closeDrawer(); };
+  });
+
+  const scroller = document.getElementById("scroller");
+  let hintHidden = false;
+  scroller.addEventListener("scroll", ()=>{
+    if(!hintHidden && scroller.scrollTop > 30){
+      document.getElementById("scrollHint").classList.add("hide");
+      hintHidden = true;
+    }
+  }, {passive:true});
+})();
+
+// ===== SESSION =====
+function isSessionValid(){
+  if(!state.authed) return false;
+  if(state.keyType === "ADMIN") return true;
+  if(Date.now() > state.keyExp) return false;
+  if(state.keyUsesLeft <= 0) return false;
+  return true;
+}
+function clearAuth(){
+  state.authed = false;
+  state.key = "";
+  state.keyType = "";
+  state.keyExp = 0;
+  state.keyUsesLeft = 0;
+  try{ localStorage.removeItem("kaitokid_session"); }catch(e){}
+}
+function saveSession(){
+  try{
+    const session = {
+      authed: state.authed,
+      key: state.key,
+      keyType: state.keyType,
+      keyExp: state.keyExp,
+      keyUsesLeft: state.keyUsesLeft === Infinity ? "INF" : state.keyUsesLeft,
+      savedAt: Date.now()
+    };
+    localStorage.setItem("kaitokid_session", JSON.stringify(session));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem("kaitokid_session");
+    if(raw){
+      const s = JSON.parse(raw);
+      state.authed = s.authed || false;
+      state.key = s.key || "";
+      state.keyType = s.keyType || "";
+      state.keyExp = s.keyExp || 0;
+      state.keyUsesLeft = s.keyUsesLeft === "INF" ? Infinity : (s.keyUsesLeft || 0);
+    }
+  }catch(e){}
+  try{
+    const raw = localStorage.getItem("kaitokid_data");
+    if(raw){
+      const d = JSON.parse(raw);
+      state.profiles = d.profiles || [];
+      state.history = d.history || [];
+    }
+  }catch(e){}
+}
+function saveData(){
+  try{
+    localStorage.setItem("kaitokid_data", JSON.stringify({
+      profiles: state.profiles,
+      history: state.history
+    }));
+  }catch(e){}
+}
+
+// ===== NAV =====
+function go(screenId){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  const el = document.getElementById(screenId);
+  if(el) el.classList.add("active");
+  state.currentScreen = screenId;
+  document.querySelectorAll(".drawer-item").forEach(i=>{
+    if(i.classList.contains("logout")) return;
+    i.classList.toggle("active", i.dataset.screen === screenId);
+  });
+  const scroller = document.getElementById("scroller");
+  scroller.scrollTo({top:0, behavior:"smooth"});
+  document.getElementById("scrollHint").classList.remove("hide");
+  if(screenId === "profileScreen") renderProfiles();
+  if(screenId === "historyScreen") renderHistory();
+  if(screenId === "statsScreen") renderStats();
+  if(screenId === "compareScreen") renderCompare();
+  if(screenId === "dashboardScreen") updateDashboard();
+  if(screenId === "deviceScreen") updateDeviceInfo();
+}
+function openDrawer(){ document.getElementById("drawer").classList.add("open"); document.getElementById("overlay").classList.add("show"); }
+function closeDrawer(){ document.getElementById("drawer").classList.remove("open"); document.getElementById("overlay").classList.remove("show"); }
+function confirmLogout(){
+  closeDrawer();
+  setTimeout(()=>{
+    if(confirm("Bạn chắc chắn muốn đăng xuất khỏi KAITOKID VIP?")){
+      logout();
+    }
+  }, 250);
+}
+let toastTimer;
+function toast(msg, type){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "";
+  if(type) t.classList.add(type);
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+// ===== LOGIN =====
+function doLogin(){
+  const raw = document.getElementById("keyInput").value.trim().toUpperCase();
+  if(!raw){ toast("Vui lòng nhập KEY","err"); return; }
+
+  const overlay = document.getElementById("loadingOverlay");
+  const ltxt = document.getElementById("loadingText");
+  overlay.classList.add("show");
+  ltxt.textContent = "Đang xác thực KEY...";
+
+  setTimeout(()=>{
+    // ADMIN
+    if(raw === ADMIN_KEY){
+      state.authed = true;
+      state.key = raw;
+      state.keyType = "ADMIN";
+      state.keyExp = 0;
+      state.keyUsesLeft = Infinity;
+      document.getElementById("keyStatus").textContent = "Admin — Vô hạn";
+      document.getElementById("keyStatus").style.color = "#00ffc8";
+      ltxt.textContent = "Đăng nhập Admin thành công...";
+      saveSession();
+      setTimeout(()=>{
+        overlay.classList.remove("show");
+        toast("Đăng nhập Admin thành công","ok");
+        updateDashboard();
+        go("dashboardScreen");
+      }, 700);
+      return;
+    }
+
+    // NORMAL KEYS
+    if(NORMAL_KEYS.includes(raw)){
+      const store = getKeyUsageStore();
+      const info = store[raw] || { firstUse: Date.now(), uses: 0, exp: 0 };
+
+      if(info.exp && Date.now() > info.exp){
+        document.getElementById("keyStatus").textContent = "KEY đã hết hạn";
+        document.getElementById("keyStatus").style.color = "#ff3b6b";
+        ltxt.textContent = "KEY đã hết hạn";
+        setTimeout(()=>{
+          overlay.classList.remove("show");
+          toast("KEY này đã hết hạn sử dụng","err");
+        }, 900);
+        return;
+      }
+      if(info.uses >= NORMAL_MAX_USES){
+        document.getElementById("keyStatus").textContent = "KEY đã hết lượt";
+        document.getElementById("keyStatus").style.color = "#ff3b6b";
+        ltxt.textContent = "KEY đã hết lượt dùng";
+        setTimeout(()=>{
+          overlay.classList.remove("show");
+          toast("KEY này đã dùng đủ " + NORMAL_MAX_USES + " lần","err");
+        }, 900);
+        return;
+      }
+
+      info.uses = (info.uses || 0) + 1;
+      if(!info.exp){
+        info.exp = info.firstUse + NORMAL_MS;
+      }
+      store[raw] = info;
+      saveKeyUsageStore(store);
+
+      state.authed = true;
+      state.key = raw;
+      state.keyType = "NORMAL";
+      state.keyExp = info.exp;
+      state.keyUsesLeft = NORMAL_MAX_USES - info.uses;
+
+      document.getElementById("keyStatus").textContent = "Đã xác thực";
+      document.getElementById("keyStatus").style.color = "#00ffc8";
+      ltxt.textContent = "Đăng nhập thành công...";
+      saveSession();
+      setTimeout(()=>{
+        overlay.classList.remove("show");
+        toast("Đăng nhập thành công — còn " + state.keyUsesLeft + " lượt","ok");
+        updateDashboard();
+        go("dashboardScreen");
+      }, 700);
+      return;
+    }
+
+    // INVALID
+    state.authed = false;
+    document.getElementById("keyStatus").textContent = "KEY không hợp lệ";
+    document.getElementById("keyStatus").style.color = "#ff3b6b";
+    ltxt.textContent = "KEY không hợp lệ";
+    setTimeout(()=>{
+      overlay.classList.remove("show");
+      toast("KEY không hợp lệ","err");
+    }, 900);
+  }, 800);
+}
+function logout(){
+  clearAuth();
+  document.getElementById("keyInput").value = "";
+  document.getElementById("keyStatus").textContent = "Chưa xác thực";
+  document.getElementById("keyStatus").style.color = "#7a9bc8";
+  toast("Đã đăng xuất");
+  go("loginScreen");
+}
+
+// ===== DASHBOARD =====
+function updateDashboard(){
+  if(!state.authed) return;
+  const masked = state.key.length > 8 ? state.key.slice(0,8) + "••••" : state.key;
+
+  document.getElementById("dashKey").textContent = masked;
+  document.getElementById("dashKeyType").textContent = state.keyType === "ADMIN" ? "ADMIN" : "THƯỜNG";
+  document.getElementById("dashDevice").textContent = getDeviceName();
+
+  const isAdmin = state.keyType === "ADMIN";
+  document.getElementById("dashStatus").textContent = "ACTIVE";
+  document.getElementById("dashStatus").style.color = "#00ffc8";
+  document.getElementById("acctBadge").innerHTML = '<svg class="ic"><use href="#i-check"/></svg>' + (isAdmin ? "ADMIN" : "ACTIVE");
+
+  if(isAdmin){
+    document.getElementById("dashExp").textContent = "Vô hạn";
+    document.getElementById("dashUses").textContent = "Vô hạn";
+  } else {
+    document.getElementById("dashExp").textContent = formatDate(state.keyExp);
+    document.getElementById("dashUses").textContent = state.keyUsesLeft + " / 10";
+  }
+
+  document.getElementById("vipTitle").textContent = isAdmin ? "KAITOKID ADMIN" : "KAITOKID VIP";
+  document.getElementById("vipSubtitle").textContent = isAdmin ? "Quyền quản trị viên" : "Tài khoản đang hoạt động";
+  document.getElementById("vipStatus").textContent = "ACTIVE";
+  document.getElementById("vipType").textContent = isAdmin ? "ADMIN" : "THƯỜNG";
+  document.getElementById("vipKey").textContent = masked;
+  document.getElementById("vipExp").textContent = isAdmin ? "Vô hạn" : formatDate(state.keyExp);
+  document.getElementById("vipUses").textContent = isAdmin ? "Vô hạn" : state.keyUsesLeft + " / 10";
+
+  document.getElementById("keyInfoKey").textContent = masked;
+  document.getElementById("keyInfoType").textContent = isAdmin ? "ADMIN" : "THƯỜNG";
+  document.getElementById("keyInfoStatus").textContent = "ACTIVE";
+  document.getElementById("keyInfoStatus").style.color = "#00ffc8";
+  document.getElementById("keyInfoExp").textContent = isAdmin ? "Vô hạn" : formatDate(state.keyExp);
+  document.getElementById("keyInfoUses").textContent = isAdmin ? "Vô hạn" : state.keyUsesLeft + " / 10";
+}
+function formatDate(ts){
+  if(!ts) return "—";
+  const d = new Date(ts);
+  return d.getDate().toString().padStart(2,"0") + "/" +
+         (d.getMonth()+1).toString().padStart(2,"0") + "/" +
+         d.getFullYear() + " " +
+         d.getHours().toString().padStart(2,"0") + ":" +
+         d.getMinutes().toString().padStart(2,"0");
+}
+function getDeviceName(){
+  const ua = navigator.userAgent;
+  if(/iPhone/.test(ua)) return "iPhone (Browser)";
+  if(/Android/.test(ua)) return "Android Device";
+  if(/iPad/.test(ua)) return "iPad";
+  if(/Mac/.test(ua)) return "Mac";
+  if(/Windows/.test(ua)) return "Windows PC";
+  return "Unknown Device";
+}
+
+// ===== BRAND/MODEL =====
+function buildBrandGrid(){
+  const grid = document.getElementById("brandGrid");
+  grid.innerHTML = "";
+  Object.keys(DEVICES).forEach(b=>{
+    const d = document.createElement("div");
+    d.className = "brand-chip";
+    d.textContent = b;
+    d.onclick = ()=>{
+      document.querySelectorAll(".brand-chip").forEach(c=>c.classList.remove("active"));
+      d.classList.add("active");
+      state.selectedBrand = b;
+      renderModels(b);
+      document.getElementById("quickResult").innerHTML = "";
+    };
+    grid.appendChild(d);
+  });
+}
+function renderModels(brand){
+  const list = document.getElementById("modelList");
+  document.getElementById("modelTitle").innerHTML = '<svg class="ic"><use href="#i-device"/></svg> Dòng máy ' + brand;
+  list.innerHTML = "";
+  DEVICES[brand].forEach(m=>{
+    const d = document.createElement("div");
+    d.className = "model-item";
+    d.innerHTML = '<span>'+m+'</span><svg class="ic chev"><use href="#i-chev"/></svg>';
+    d.onclick = ()=>selectDevice(m);
+    list.appendChild(d);
+  });
+}
+function renderSearchResults(results){
+  const list = document.getElementById("modelList");
+  document.getElementById("modelTitle").innerHTML = '<svg class="ic"><use href="#i-search"/></svg> Kết quả (' + results.length + ')';
+  if(!results.length){
+    list.innerHTML = '<div class="empty"><span class="em"><svg class="ic"><use href="#i-search"/></svg></span>Không tìm thấy thiết bị</div>';
+    return;
+  }
+  list.innerHTML = "";
+  results.forEach(r=>{
+    const d = document.createElement("div");
+    d.className = "model-item";
+    d.innerHTML = '<span>'+r.model+' <small style="color:#456;font-size:9px;">('+r.brand+')</small></span><svg class="ic chev"><use href="#i-chev"/></svg>';
+    d.onclick = ()=>selectDevice(r.model);
+    list.appendChild(d);
+  });
+}
+
+// ===== SENSITIVITY =====
+function computeQuickSens(model){
+  const apple = isApple(model);
+  const MAX = apple ? 150 : 200;
+  const spec = getSpec(model);
+  const baseRatio = apple
+    ? { "GENERAL":0.95, "RED DOT":0.90, "2X SCOPE":0.85, "4X SCOPE":0.75, "SNIPER":0.55, "FREE LOOK":0.80 }
+    : { "GENERAL":1.00, "RED DOT":0.95, "2X SCOPE":0.90, "4X SCOPE":0.80, "SNIPER":0.60, "FREE LOOK":0.85 };
+  let devMod = 0;
+  if(spec.refresh === "165Hz") devMod = +6;
+  else if(spec.refresh === "120Hz") devMod = +4;
+  else if(spec.refresh === "90Hz") devMod = +2;
+  else if(spec.refresh === "60Hz") devMod = -2;
+  const sens = {};
+  for(const k in baseRatio){
+    let v = Math.round(MAX * baseRatio[k]) + devMod;
+    v = Math.max(10, Math.min(MAX, v));
+    if(apple) v = Math.min(150, v);
+    sens[k] = v;
+  }
+  return { sens, max: MAX, apple };
+}
+function computeSensitivity(){
+  const apple = isApple(state.selectedDevice);
+  const MAX = apple ? 150 : 200;
+  const spec = getSpec(state.selectedDevice);
+  const baseRatio = apple
+    ? { "GENERAL":0.95, "RED DOT":0.90, "2X SCOPE":0.85, "4X SCOPE":0.75, "SNIPER":0.55, "FREE LOOK":0.80 }
+    : { "GENERAL":1.00, "RED DOT":0.95, "2X SCOPE":0.90, "4X SCOPE":0.80, "SNIPER":0.60, "FREE LOOK":0.85 };
+  const controlMod = { "Smooth":-5, "Balanced":0, "Fast":+5 };
+  const playMod = { "Precision":-5, "Balanced":0, "Fast Response":+6 };
+  const screenMod = { "Small":+5, "Medium":0, "Large":-5 };
+  let devMod = 0;
+  if(spec.refresh === "165Hz") devMod = +6;
+  else if(spec.refresh === "120Hz") devMod = +4;
+  else if(spec.refresh === "90Hz") devMod = +2;
+  else if(spec.refresh === "60Hz") devMod = -2;
+  const total = controlMod[state.control] + playMod[state.playstyle] + screenMod[state.screen] + devMod;
+  const sens = {};
+  for(const k in baseRatio){
+    let v = Math.round(MAX * baseRatio[k]) + total;
+    v = Math.max(10, Math.min(MAX, v));
+    if(apple) v = Math.min(150, v);
+    sens[k] = v;
+  }
+  return { sens, max: MAX, apple };
+}
+
+function selectDevice(model){
+  state.selectedDevice = model;
+  const { sens, max, apple } = computeQuickSens(model);
+  state.quickSensitivity = sens;
+  const spec = getSpec(model);
+  const dp = document.getElementById("deviceProfile");
+  dp.innerHTML =
+    '<div class="dp-row"><span class="k">Tên thiết bị</span><span class="v">'+model+'</span></div>'+
+    '<div class="dp-row"><span class="k">Kích thước màn hình</span><span class="v">'+spec.screen+'</span></div>'+
+    '<div class="dp-row"><span class="k">Tần số quét</span><span class="v">'+spec.refresh+'</span></div>'+
+    '<div class="dp-row"><span class="k">Độ phân giải</span><span class="v">'+spec.res+'</span></div>'+
+    '<div class="dp-row"><span class="k">Hệ điều hành</span><span class="v">'+spec.os+'</span></div>'+
+    '<div class="dp-row"><span class="k">Phương thức điều khiển</span><span class="v">Touch / Multi-touch</span></div>';
+  addHistory(model);
+  toast("Đã chọn: " + model, "ok");
+  renderQuickResult(model, sens, max, apple);
+  setTimeout(()=>{
+    const qr = document.getElementById("quickResult");
+    if(qr) qr.scrollIntoView({behavior:"smooth", block:"start"});
+  }, 200);
+}
+
+function renderQuickResult(model, sens, max, apple){
+  const keys = ["GENERAL","RED DOT","2X SCOPE","4X SCOPE","SNIPER","FREE LOOK"];
+  const icons = {
+    "GENERAL":"i-target","RED DOT":"i-dot","2X SCOPE":"i-binocular",
+    "4X SCOPE":"i-telescope","SNIPER":"i-sniper","FREE LOOK":"i-freelook"
+  };
+  let rows = "";
+  keys.forEach(k=>{
+    const v = sens[k];
+    const ratio = v / max;
+    const cls = ratio >= 0.85 ? "hi" : ratio >= 0.65 ? "mid" : "low";
+    rows +=
+      '<div class="qr-row">'+
+        '<span class="lbl"><svg class="ic"><use href="#'+icons[k]+'"/></svg> '+k+'</span>'+
+        '<span class="val '+cls+'">'+v+'</span>'+
+      '</div>';
+  });
+  const platLabel = apple ? "iOS / iPHONE" : "ANDROID";
+  const platBadge = apple ? "badge blue" : "badge green";
+  document.getElementById("quickResult").innerHTML =
+    '<div class="quick-result">'+
+      '<div class="qr-header">'+
+        '<div class="icon"><svg class="ic ic-md"><use href="#i-device"/></svg></div>'+
+        '<div class="txt">'+
+          '<div class="name">'+model+'</div>'+
+          '<div class="plat">'+platLabel+' • MAX '+max+'</div>'+
+        '</div>'+
+        '<span class="'+platBadge+'">'+(apple?"APPLE":"ANDROID")+'</span>'+
+      '</div>'+
+      '<div class="qr-body">'+
+        rows+
+        '<div class="qr-note">Giá trị tham khảo — bạn có thể lưu hoặc xem chi tiết</div>'+
+        '<div class="qr-actions">'+
+          '<button class="save" onclick="saveQuickProfile()"><svg class="ic"><use href="#i-save"/></svg> LƯU NHANH</button>'+
+          '<button class="detail" onclick="go(\'configScreen\')"><svg class="ic"><use href="#i-settings"/></svg> TÙY CHỈNH</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+}
+
+function saveQuickProfile(){
+  if(!state.selectedDevice){ toast("Chưa chọn thiết bị","err"); return; }
+  state.sensitivity = {...state.quickSensitivity};
+  state.control = "Balanced";
+  state.playstyle = "Balanced";
+  state.screen = "Medium";
+  const name = "QUICK " + state.selectedDevice + " #" + (state.profiles.length+1);
+  const p = {
+    id: Date.now(),
+    name: name,
+    device: state.selectedDevice,
+    control: state.control,
+    playstyle: state.playstyle,
+    screen: state.screen,
+    sensitivity: {...state.sensitivity},
+    date: formatDate(Date.now()),
+    max: isApple(state.selectedDevice) ? 150 : 200
+  };
+  state.profiles.unshift(p);
+  saveData();
+  renderProfiles();
+  toast("Đã lưu nhanh: " + name, "ok");
+}
+
+function generateSensitivity(){
+  if(!state.selectedDevice){ toast("Vui lòng chọn thiết bị","err"); go("findScreen"); return; }
+  const overlay = document.getElementById("analyzing");
+  const txt = document.getElementById("analyzingText");
+  const prog = document.getElementById("analyzingProgress");
+  overlay.classList.add("show");
+  const steps = [
+    {t:"Đang phân tích thiết bị...", p:50},
+    {t:"Đang tạo cấu hình...", p:100}
+  ];
+  let i = 0;
+  prog.style.width = "0%";
+  const run = ()=>{
+    if(i >= steps.length){
+      setTimeout(()=>{
+        overlay.classList.remove("show");
+        const { sens, max, apple } = computeSensitivity();
+        state.sensitivity = sens;
+        document.getElementById("resultDevice").textContent =
+          state.selectedDevice + " • " + state.control + " • " + state.playstyle + " • MAX " + max;
+        renderSensitivity(sens, max, apple);
+        go("resultScreen");
+        toast("Tạo độ nhạy thành công","ok");
+      }, 400);
+      return;
+    }
+    txt.textContent = steps[i].t;
+    prog.style.width = steps[i].p + "%";
+    i++;
+    setTimeout(run, 700);
+  };
+  run();
+}
+
+function renderSensitivity(sens, max, apple){
+  const list = document.getElementById("sensList");
+  list.innerHTML = "";
+  const keys = ["GENERAL","RED DOT","2X SCOPE","4X SCOPE","SNIPER","FREE LOOK"];
+  const icons = {
+    "GENERAL":"i-target","RED DOT":"i-dot","2X SCOPE":"i-binocular",
+    "4X SCOPE":"i-telescope","SNIPER":"i-sniper","FREE LOOK":"i-freelook"
+  };
+  keys.forEach(k=>{
+    const v = sens[k];
+    const card = document.createElement("div");
+    card.className = "sens-item";
+    card.innerHTML =
+      '<span class="sens-name"><svg class="ic"><use href="#'+icons[k]+'"/></svg> '+k+'</span>'+
+      '<span class="sens-val">'+v+'</span>';
+    list.appendChild(card);
+  });
+}
+
+function saveProfile(){
+  const name = document.getElementById("profileName").value.trim() || ("KAITOKID PROFILE " + String(state.profiles.length+1).padStart(2,"0"));
+  if(!state.selectedDevice){ toast("Chưa có thiết bị","err"); return; }
+  const p = {
+    id: Date.now(),
+    name: name,
+    device: state.selectedDevice,
+    control: state.control,
+    playstyle: state.playstyle,
+    screen: state.screen,
+    sensitivity: {...state.sensitivity},
+    date: formatDate(Date.now()),
+    max: isApple(state.selectedDevice) ? 150 : 200
+  };
+  state.profiles.unshift(p);
+  saveData();
+  renderProfiles();
+  toast("Đã lưu: " + name, "ok");
+  document.getElementById("profileName").value = "";
+}
+
+function renderProfiles(){
+  const list = document.getElementById("profileList");
+  if(!state.profiles.length){
+    list.innerHTML = '<div class="empty"><span class="em"><svg class="ic"><use href="#i-target"/></svg></span>Chưa có profile nào<br><small>Hãy tạo độ nhạy và lưu lại</small></div>';
+    return;
+  }
+  list.innerHTML = "";
+  state.profiles.forEach(p=>{
+    const d = document.createElement("div");
+    d.className = "profile-item";
+    d.innerHTML =
+      '<div class="between"><div class="name">'+p.name+'</div><span class="badge green"><svg class="ic"><use href="#i-check"/></svg>Saved</span></div>'+
+      '<div class="meta">'+p.device+' • '+p.control+' • '+p.playstyle+' • '+p.date+'</div>'+
+      '<div class="profile-actions">'+
+        '<button class="apply" data-id="'+p.id+'" data-act="apply"><svg class="ic ic-sm"><use href="#i-play"/></svg>APPLY</button>'+
+        '<button data-id="'+p.id+'" data-act="view"><svg class="ic ic-sm"><use href="#i-eye"/></svg>VIEW</button>'+
+        '<button class="del" data-id="'+p.id+'" data-act="del"><svg class="ic ic-sm"><use href="#i-trash"/></svg></button>'+
+      '</div>';
+    list.appendChild(d);
+  });
+  list.querySelectorAll("button").forEach(b=>{
+    b.onclick = ()=>{
+      const id = parseInt(b.dataset.id);
+      const act = b.dataset.act;
+      const p = state.profiles.find(x=>x.id===id);
+      if(!p) return;
+      if(act==="apply" || act==="view"){
+        state.selectedDevice = p.device;
+        state.control = p.control;
+        state.playstyle = p.playstyle;
+        state.screen = p.screen;
+        state.sensitivity = {...p.sensitivity};
+        const max = isApple(p.device) ? 150 : 200;
+        document.getElementById("resultDevice").textContent = p.device + " • " + p.control + " • " + p.playstyle + " • MAX " + max;
+        renderSensitivity(state.sensitivity, max, isApple(p.device));
+        go("resultScreen");
+        toast((act==="apply"?"Đã áp dụng: ":"Xem: ") + p.name, "ok");
+      } else if(act==="del"){
+        state.profiles = state.profiles.filter(x=>x.id!==id);
+        saveData(); renderProfiles();
+        toast("Đã xóa profile");
+      }
+    };
+  });
+}
+
+function renderCompare(){
+  const a = document.getElementById("cmpA");
+  const b = document.getElementById("cmpB");
+  if(state.profiles.length < 2){
+    a.innerHTML = '<option>—</option>';
+    b.innerHTML = '<option>—</option>';
+    document.getElementById("compareResult").innerHTML = '<div class="empty"><span class="em"><svg class="ic"><use href="#i-chart"/></svg></span>Cần ít nhất 2 profile để so sánh</div>';
+    return;
+  }
+  const opts = state.profiles.map(p=>'<option value="'+p.id+'">'+p.name+'</option>').join("");
+  a.innerHTML = opts; b.innerHTML = opts;
+  b.selectedIndex = 1;
+  const update = ()=>{
+    const pa = state.profiles.find(x=>x.id===parseInt(a.value));
+    const pb = state.profiles.find(x=>x.id===parseInt(b.value));
+    if(!pa || !pb) return;
+    const keys = ["GENERAL","RED DOT","2X SCOPE","4X SCOPE","SNIPER","FREE LOOK"];
+    let html = '<div class="card"><div class="card-title"><svg class="ic"><use href="#i-chart"/></svg> SO SÁNH</div><div style="margin-top:10px;">';
+    keys.forEach(k=>{
+      const va = pa.sensitivity[k], vb = pb.sensitivity[k];
+      const max = Math.max(va, vb, 200);
+      html +=
+        '<div style="margin-bottom:10px;">'+
+          '<div style="font-size:10px;color:#7a9bc8;margin-bottom:4px;font-weight:700;">'+k+'</div>'+
+          '<div class="compare-bar"><span class="lbl" style="color:#00d4ff;">'+va+'</span><div class="bar"><div class="fill a" style="width:'+(va/max*100)+'%"></div></div></div>'+
+          '<div class="compare-bar"><span class="lbl" style="color:#8b5dff;">'+vb+'</span><div class="bar"><div class="fill b" style="width:'+(vb/max*100)+'%"></div></div></div>'+
+        '</div>';
+    });
+    html += '</div></div>';
+    document.getElementById("compareResult").innerHTML = html;
+  };
+  a.onchange = update;
+  b.onchange = update;
+  update();
+}
+
+function addHistory(model){
+  state.history.unshift({
+    device: model,
+    profile: "Sensitivity Profile",
+    date: formatDate(Date.now())
+  });
+  state.history = state.history.slice(0, 30);
+  saveData();
+}
+function renderHistory(){
+  const list = document.getElementById("historyList");
+  if(!state.history.length){
+    list.innerHTML = '<div class="empty"><span class="em"><svg class="ic"><use href="#i-history"/></svg></span>Chưa có lịch sử</div>';
+    return;
+  }
+  list.innerHTML = "";
+  state.history.forEach(h=>{
+    const d = document.createElement("div");
+    d.className = "history-item";
+    d.innerHTML =
+      '<div><div class="h-name">'+h.device+'</div>'+
+      '<div class="h-date">'+h.profile+' • '+h.date+'</div></div>'+
+      '<div class="h-icon"><svg class="ic"><use href="#i-device"/></svg></div>';
+    list.appendChild(d);
+  });
+}
+function clearHistory(){
+  state.history = [];
+  saveData();
+  renderHistory();
+  toast("Đã xóa lịch sử");
+}
+
+function renderStats(){
+  const el = document.getElementById("statsContent");
+  const total = state.profiles.length;
+  const devices = {};
+  state.profiles.forEach(p=>{ devices[p.device] = (devices[p.device]||0)+1; });
+  let topDevice = "—", topCount = 0;
+  for(const d in devices){ if(devices[d] > topCount){ topCount = devices[d]; topDevice = d; } }
+  el.innerHTML =
+    '<div class="card"><div class="card-title"><svg class="ic"><use href="#i-chart"/></svg> TỔNG QUAN</div>'+
+    '<div class="dp-row"><span class="k">Tổng Profile</span><span class="v">'+total+'</span></div>'+
+    '<div class="dp-row"><span class="k">Lịch sử tìm</span><span class="v">'+state.history.length+'</span></div>'+
+    '<div class="dp-row"><span class="k">Thiết bị nhiều nhất</span><span class="v">'+topDevice+'</span></div>'+
+    '<div class="dp-row"><span class="k">Trạng thái</span><span class="v" style="color:#00ffc8;">ONLINE</span></div>'+
+    '</div>'+
+    '<div class="card"><div class="card-title"><svg class="ic"><use href="#i-target"/></svg> PHONG CÁCH ĐÃ DÙNG</div>'+
+    '<div class="dp-row"><span class="k">Control</span><span class="v">'+state.control+'</span></div>'+
+    '<div class="dp-row"><span class="k">Play Style</span><span class="v">'+state.playstyle+'</span></div>'+
+    '<div class="dp-row"><span class="k">Screen</span><span class="v">'+state.screen+'</span></div>'+
+    '</div>';
+}
+
+function updateDeviceInfo(){
+  const el = document.getElementById("deviceInfoContent");
+  const ua = navigator.userAgent;
+  let platform = "Unknown";
+  if(/iPhone/.test(ua)) platform = "iPhone";
+  else if(/iPad/.test(ua)) platform = "iPad";
+  else if(/Android/.test(ua)) platform = "Android";
+  else if(/Mac/.test(ua)) platform = "Mac";
+  else if(/Windows/.test(ua)) platform = "Windows";
+  const cores = navigator.hardwareConcurrency || "—";
+  const mem = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "—";
+  el.innerHTML =
+    '<div class="dp-row"><span class="k">Thiết bị</span><span class="v">'+getDeviceName()+'</span></div>'+
+    '<div class="dp-row"><span class="k">Nền tảng</span><span class="v">'+platform+'</span></div>'+
+    '<div class="dp-row"><span class="k">Màn hình</span><span class="v">'+window.screen.width+' x '+window.screen.height+'</span></div>'+
+    '<div class="dp-row"><span class="k">Pixel Ratio</span><span class="v">'+(window.devicePixelRatio||1)+'x</span></div>'+
+    '<div class="dp-row"><span class="k">CPU Cores</span><span class="v">'+cores+'</span></div>'+
+    '<div class="dp-row"><span class="k">RAM (approx)</span><span class="v">'+mem+'</span></div>'+
+    '<div class="dp-row"><span class="k">Ngôn ngữ</span><span class="v">'+navigator.language+'</span></div>';
+}
+
+document.addEventListener("click", e=>{
+  const t = e.target.closest(".btn, .opt-card, .model-item, .brand-chip, .profile-actions button, .qr-actions button");
+  if(!t) return;
+  const r = document.createElement("span");
+  r.className = "ripple";
+  const rect = t.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  r.style.width = r.style.height = size + "px";
+  r.style.left = (e.clientX - rect.left - size/2) + "px";
+  r.style.top = (e.clientY - rect.top - size/2) + "px";
+  if(getComputedStyle(t).position === "static") t.style.position = "relative";
+  t.style.overflow = "hidden";
+  t.appendChild(r);
+  setTimeout(()=>r.remove(), 600);
+});
+
+setInterval(()=>{
+  if(state.authed && !isSessionValid()){
+    toast("KEY đã hết hạn, vui lòng nhập lại","warn");
+    clearAuth();
+    document.getElementById("keyStatus").textContent = "Chưa xác thực";
+    document.getElementById("keyStatus").style.color = "#7a9bc8";
+    go("loginScreen");
+  }
+}, 30000);
+</script>
+</body>
+</html>
